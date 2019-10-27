@@ -5,6 +5,8 @@ import com.example.towns.town.TownService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 import java.util.List;
 
 
@@ -20,25 +22,25 @@ public class UserController {
     TownService townService;
 
     @GetMapping
-    public List<User> all() {
+    public List<User> all( Principal principal) {
+        log.info("____ all uso " + principal.getName());
         return userService.getUsers();
     }
 
     @PostMapping("town")
-    public int addToTowns(@RequestBody Town town) {
-        String username = "test";
-        return townService.addTowns(username, town);
+    public int addToTowns(@RequestBody Town town, Principal principal) {
+        log.info("____ addToTowns uso " + principal);
+        return townService.addTowns(principal.getName(), town);
     }
 
     @PostMapping("towns/{townId}")
-    public int addTown(@PathVariable("townId") int townId) {
-        String username = "test";
-        return userService.selectTown(username, townId);
+    public int addTown(@PathVariable("townId") int townId, Principal principal) {
+        log.info("____ addTown uso " + principal);
+        return userService.selectTown(principal.getName(), townId);
     }
 
     @DeleteMapping("towns/{townId}")
-    public int deleteTown(@PathVariable("townId") int townId) {
-        String username = "test";
-        return userService.deselectTown(username, townId);
+    public int deleteTown(@PathVariable("townId") int townId, Principal principal) {
+        return userService.deselectTown(principal.getName(), townId);
     }
 }
