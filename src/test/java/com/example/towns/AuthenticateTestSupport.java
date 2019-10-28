@@ -11,13 +11,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@AutoConfigureMockMvc
 public class AuthenticateTestSupport {
 
     @Autowired
     private MockMvc mockMvc;
 
-//    @Autowired
     public ObjectMapper mapper = new ObjectMapper();
 
     public String authenticate(String username, String password) {
