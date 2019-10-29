@@ -44,7 +44,7 @@ public class UsersIntegrationTest extends AuthenticateTestSupport {
 
         String token = authenticate("test", "test");
 
-        String newTown = mapper.writer().writeValueAsString(new Town(0, "Split", "najveci dalmatinski", 200000, 0));
+        String newTown = mapper.writer().writeValueAsString(new Town(0, "Split", "najveci dalmatinski", 200000, 0, "test"));
         mockMvc.perform(post("/users/town")
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON)

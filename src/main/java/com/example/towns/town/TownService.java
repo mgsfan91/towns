@@ -9,21 +9,19 @@ import java.util.List;
 
 @Service
 @Transactional
-@Slf4j
 public class TownService {
 
     @Autowired
     TownRepository townRepository;
 
     public List<Town> getTowns() {
-        log.info("____ getTowns " + townRepository.findAll());
         return townRepository.findAll();
     }
 
     public int addTowns(String username, Town town) {
-        log.info("*****  addTowns " + username + ", " + town);
         town.setId(0);
         town.setPopularityCnt(0);
+        town.setAddedBy(username);
         Town saved = townRepository.save(town);
         return saved.getId();
     }
