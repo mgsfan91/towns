@@ -21,16 +21,17 @@ public class UserController {
     @Autowired
     TownService townService;
 
-    @GetMapping
-    public List<User> all( Principal principal) {
-        log.info("____ all uso " + principal.getName());
-        return userService.getUsers();
-    }
 
     @PostMapping("town")
     public int addToTowns(@RequestBody Town town, Principal principal) {
         log.info("____ addToTowns uso " + principal);
         return townService.addTowns(principal.getName(), town);
+    }
+
+    @GetMapping("towns")
+    public List<Town> getFavouriteTowns(Principal principal) {
+        log.info("____ getFavouriteTowns uso " + principal);
+        return userService.getFavouriteTowns(principal.getName());
     }
 
     @PostMapping("towns/{townId}")

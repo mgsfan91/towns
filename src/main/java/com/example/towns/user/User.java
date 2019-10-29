@@ -20,9 +20,6 @@ public class User {
     @Column
     private String password;
 
-    @Column
-    private short enabled;
-
     @ManyToMany
     @JoinTable(
             name="town_user",

@@ -20,10 +20,6 @@ public class UserService {
     @Autowired
     TownRepository townRepository;
 
-    public List<User> getUsers() {
-        log.info("____ getUsers " + userRepository.findAll());
-        return userRepository.findAll();
-    }
 
     public int selectTown(String username, int townId) {
         User user = userRepository.findById(username)
@@ -45,5 +41,12 @@ public class UserService {
         user.removeTown(town);
         town.decrementPopularity();
         return town.getId();
+    }
+
+    public List<Town> getFavouriteTowns(String username) {
+        User user = userRepository.findById(username)
+                .orElseThrow( () -> new RuntimeException("username not found: " + username));
+
+        return user.getTowns();
     }
 }
