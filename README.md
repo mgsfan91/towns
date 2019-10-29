@@ -7,6 +7,14 @@ as well as select their favourite ones.
 
 ## Run
 
+The app properties: 
+
+__jwt.secret__ - signing key for token
+
+__jwt.duration__ - duration of token (ms)
+
+__spring.datasource.*__ - standard Spring properties to change the database
+
 To run on 8090 with the wrapper
 ```
 ./mvnw spring-boot:run
