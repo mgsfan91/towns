@@ -1,6 +1,6 @@
 package com.example.towns.user;
 
-import com.example.towns.exception.TownNotFoundException;
+import com.example.towns.setup.TownNotFoundException;
 import com.example.towns.town.Town;
 import lombok.*;
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package com.example.towns.user;
 
-import com.example.towns.exception.TownNotFoundException;
+import com.example.towns.setup.TownNotFoundException;
 import com.example.towns.town.Town;
 import com.example.towns.town.TownRepository;
 import org.springframework.beans.factory.annotation.Autowired;

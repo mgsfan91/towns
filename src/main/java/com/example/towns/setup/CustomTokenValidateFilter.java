@@ -1,4 +1,4 @@
-package com.example.towns.configuration;
+package com.example.towns.setup;
 
 import com.example.towns.authentication.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;

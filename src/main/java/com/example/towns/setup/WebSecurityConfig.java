@@ -1,4 +1,4 @@
-package com.example.towns.configuration;
+package com.example.towns.setup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
