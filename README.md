@@ -12,9 +12,6 @@ To run on 8090 with the wrapper
 ./mvnw spring-boot:run
 ```
 
-TODO JEL IMA SWAGG
-Swagger is accessible on ```localhost:8090/swagger-ui.html```.
-
 
 ## Usage
 
