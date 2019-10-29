@@ -34,9 +34,6 @@ public class Town {
     @Column
     private Integer popularityCnt;
 
-    @Column
-    private String addedBy;
-
     public int incrementPopularity() {
         popularityCnt++;
         return popularityCnt;

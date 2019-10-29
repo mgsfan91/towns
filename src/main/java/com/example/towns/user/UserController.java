@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("town")
     public int addToTowns(@RequestBody Town town, Principal principal) {
-        return townService.addTowns(principal.getName(), town);
+        return townService.addTowns(town);
     }
 
     @GetMapping("towns")

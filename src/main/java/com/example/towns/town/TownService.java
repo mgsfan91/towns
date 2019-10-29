@@ -16,10 +16,9 @@ public class TownService {
         return townRepository.findAll();
     }
 
-    public int addTowns(String username, Town town) {
+    public int addTowns(Town town) {
         town.setId(0);
         town.setPopularityCnt(0);
-        town.setAddedBy(username);
         Town saved = townRepository.save(town);
         return saved.getId();
     }
