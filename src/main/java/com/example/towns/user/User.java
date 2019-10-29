@@ -1,8 +1,8 @@
 package com.example.towns.user;
 
+import com.example.towns.exception.TownNotFoundException;
 import com.example.towns.town.Town;
 import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class User {
             towns = new ArrayList<>();
         }
         if (! towns.contains(town)) {
-            throw new RuntimeException("User does not have the town: " + town);
+            throw new TownNotFoundException("User does not have the town: " + town);
         }
         towns.remove(town);
         return towns.size();

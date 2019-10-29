@@ -1,8 +1,8 @@
 package com.example.towns.user;
 
+import com.example.towns.exception.TownNotFoundException;
 import com.example.towns.town.Town;
 import com.example.towns.town.TownRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 @Transactional
-@Slf4j
 public class UserService {
 
     @Autowired
@@ -24,7 +23,7 @@ public class UserService {
     public int selectTown(String username, int townId) {
         User user = userRepository.findById(username).get();
         Town town = townRepository.findById(townId)
-                .orElseThrow( () -> new RuntimeException(" town not found: " + townId));
+                .orElseThrow( () -> new TownNotFoundException("Not found: " + townId));
 
         user.addTowns(town);
         town.incrementPopularity();
@@ -34,7 +33,7 @@ public class UserService {
     public int deselectTown(String username, int townId) {
         User user = userRepository.findById(username).get();
         Town town = townRepository.findById(townId)
-                .orElseThrow( () -> new RuntimeException(" town not found: " + townId));
+                .orElseThrow( () -> new TownNotFoundException("Not found: " + townId));
 
         user.removeTown(town);
         town.decrementPopularity();

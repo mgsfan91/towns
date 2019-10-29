@@ -20,7 +20,7 @@ public class AuthenticationService {
     private TokenUtil tokenUtil;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsServiceImpl;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,7 +32,7 @@ public class AuthenticationService {
     public TokenResponse authenticate(Credentials credentials) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 credentials.getUsername(), credentials.getPassword()));
-        UserDetails userDetails = userDetailsService
+        UserDetails userDetails = userDetailsServiceImpl
                 .loadUserByUsername(credentials.getUsername());
         String token = tokenUtil.generateOneDayToken(userDetails);
         return new TokenResponse(token);
