@@ -12,8 +12,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @RunWith(SpringRunner.class)
@@ -36,8 +36,11 @@ public class AuthenticationIntegrationTest extends AuthenticateTestSupport  {
 
     @Test
     public void whenBadCredentials_shouldNotProvideToken() throws Exception {
-        String token = authenticate("test1", "test");
-        assertNull(token);
+        String credentials = mapper.writer().writeValueAsString(new Credentials("test1", "test"));
+        mockMvc.perform(post("/authenticate")
+                .contentType("application/json")
+                .content(credentials))
+                .andExpect(status().isForbidden());
     }
 
     @Test
