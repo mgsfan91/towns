@@ -17,7 +17,7 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private TokenUtil tokenUtil;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -34,7 +34,7 @@ public class AuthenticationService {
                 credentials.getUsername(), credentials.getPassword()));
         UserDetails userDetails = userDetailsService
                 .loadUserByUsername(credentials.getUsername());
-        String token = jwtUtil.generateOneDayToken(userDetails);
+        String token = tokenUtil.generateOneDayToken(userDetails);
         return new TokenResponse(token);
     }
 

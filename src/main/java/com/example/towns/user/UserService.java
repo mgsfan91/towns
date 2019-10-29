@@ -22,8 +22,7 @@ public class UserService {
 
 
     public int selectTown(String username, int townId) {
-        User user = userRepository.findById(username)
-                .orElseThrow( () -> new RuntimeException("username not found: " + username));
+        User user = userRepository.findById(username).get();
         Town town = townRepository.findById(townId)
                 .orElseThrow( () -> new RuntimeException(" town not found: " + townId));
 
@@ -33,8 +32,7 @@ public class UserService {
     }
 
     public int deselectTown(String username, int townId) {
-        User user = userRepository.findById(username)
-                .orElseThrow( () -> new RuntimeException("username not found: " + username));
+        User user = userRepository.findById(username).get();
         Town town = townRepository.findById(townId)
                 .orElseThrow( () -> new RuntimeException(" town not found: " + townId));
 
@@ -44,8 +42,7 @@ public class UserService {
     }
 
     public List<Town> getFavouriteTowns(String username) {
-        User user = userRepository.findById(username)
-                .orElseThrow( () -> new RuntimeException("username not found: " + username));
+        User user = userRepository.findById(username).get();
 
         return user.getTowns();
     }

@@ -4,6 +4,7 @@ import com.example.towns.town.Town;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class User {
     private String username;
 
     @Column
+    @NotNull
     private String password;
 
     @ManyToMany
