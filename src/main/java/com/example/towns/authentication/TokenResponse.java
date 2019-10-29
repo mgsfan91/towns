@@ -1,4 +1,4 @@
-package com.example.towns.configuration;
+package com.example.towns.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtResponse {
+public class TokenResponse {
 
     String token;
 }
