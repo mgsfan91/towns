@@ -2,7 +2,6 @@ package com.example.towns;
 
 import com.example.towns.town.Town;
 import com.example.towns.town.TownRepository;
-import com.example.towns.user.User;
 import com.example.towns.user.UserRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -35,9 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UsersIntegrationTest extends AuthenticateTestSupport {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
     TownRepository townRepository;
 
     @Autowired
@@ -45,7 +40,7 @@ public class UsersIntegrationTest extends AuthenticateTestSupport {
 
 
     @Test
-    public void whenAddedTown_shouldOkAndHaveItListed() throws Exception {
+    public void whenAddedTown_shouldHaveItListed() throws Exception {
 
         String token = authenticate("test", "test");
 
@@ -74,14 +69,13 @@ public class UsersIntegrationTest extends AuthenticateTestSupport {
                 .andExpect(status().isOk());
 
         // get users and assert it is there
-        MvcResult result = mockMvc.perform(get("/users")
+        MvcResult result = mockMvc.perform(get("/users/towns")
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-        List users =  mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<User>>(){});
-        User user = (User) users.get(0);
-        Town town = user.getTowns().get(0);
+        List towns = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Town>>(){});
+        Town town = (Town) towns.get(0);
         assertEquals((int)town.getId(), 1);
         assertEquals(town.getName(), "Zagreb");
     }
@@ -110,14 +104,13 @@ public class UsersIntegrationTest extends AuthenticateTestSupport {
                 .andExpect(status().isOk());
 
         // get users and assert Rijeka is there
-        MvcResult result = mockMvc.perform(get("/users")
+        MvcResult result = mockMvc.perform(get("/users/towns")
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-        List users =  mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<User>>(){});
-        User user = (User) users.get(0);
-        Town town = user.getTowns().get(0);
+        List towns = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Town>>(){});
+        Town town = (Town) towns.get(0);
         assertEquals((int)town.getId(), 2);
         assertEquals(town.getName(), "Rijeka");
     }
